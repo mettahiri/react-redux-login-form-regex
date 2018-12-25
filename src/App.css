@@ -1,0 +1,79 @@
+.App {
+  position: relative;
+  text-align: center;
+  width:40%;
+  margin: 0 auto;
+  margin-top:100px;
+  background: rgba(255,255,255,.7);
+  border-radius: 5px;
+  margin-bottom: 150px;
+  box-shadow: 2px 2px 10px #222;
+  animation: fadeInUp .3s;
+
+}
+.App h2{
+  margin:0;
+  padding:10px;
+  background: rgb(38, 99, 50);
+  color :white;
+  width:100%;
+}
+form{
+  padding :40px;
+  animation: fadeIn 1.5s;
+
+}
+main {
+  position : absolute;
+  background: rgba(100,100,100,.7);
+  width: 100%;
+  height:auto;
+}
+
+form a {
+  display: block;
+  margin-top:20px;
+}
+.inputBox input{
+  width: 100%;
+  background: transparent;
+  border:none;
+  border-bottom: 1px solid #333;
+  box-shadow: none;
+
+}
+.inputBox input:focus{
+  border:none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+
+.inputBox label{
+  position: absolute;
+  top:0;
+  left:0;
+  color :#444;
+  transition: all .2s ease;
+  font-size: 18px;
+  pointer-events: none;
+}
+.inputBox input:focus ~ label,
+.inputBox input:valid ~ label
+{
+  top : -18px;
+  font-size: 15px;
+  color:rgb(38, 99, 50);
+  font-size: bold;
+}
+.inputBox {
+   position: relative;
+   margin:50px 0;
+}
+@media screen and (max-width:768px){
+  .App {
+    width:90%;
+  }
+  form{
+    padding :20px;
+  }
+}
