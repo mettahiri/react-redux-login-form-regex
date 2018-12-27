@@ -1,55 +1,75 @@
 import React, { Component } from 'react';
+import {connect} from "react-redux"
 import Field from "./Field"
 class LoginForm extends Component {
     state = { 
-        formInit : [
-            {label:"Nom", id:"nom" },
-            {label:"Prénom", id:"prenom" },
-            {label:"Email", id:"email" },
-            {label:"confirmation Email", id:"confirmEmail" },
-            {label:"Tel", id:"tel" },
-            {label:"Adresse", id:"adresse" },
-            {label:"Code Postal", id:"codePostal" }
-        ],
-        values : {
-            nom:"",
-            prenom:"",
-            email:"",
-            confirmEmail:"",
-            tel:"",
-            adress:"",
-            codePostal:""
-        }
+       
      }
-    submit = (e)=>{
+    /* handleOnSubmit = (e)=>{
             e.preventDefault()
             e.setCustomValidity("test");
-    }
-    onChange=(e)=>{
+    } */
+   /*  handleOnChange=(e)=>{
         const values = this.state.values;
         values[e.target.id] = e.target.value;
         this.setState({values})
         console.log(this.state.values)
-    }
+    } */
     render() { 
+        const FORM_INIT = this.props.formInit;
         return ( 
             <>
                 <h2>S'inscrire</h2>
-                <form onSubmit={this.submit} >{/* 
-                    <Field labelVal="Nom" id="nom" onChange={this.onChange} />
-                    <Field labelVal="Prénom" id="prenom" onChange={this.onChange}/>
-                    <Field labelVal="Email" id="email" onChange={this.onChange}/>
-                    <Field labelVal="confirmation Email" id="confirmEmail" onChange={this.onChange}/>
-                    <Field labelVal="Tel" id="tel" onChange={this.onChange}/>
-                    <Field labelVal="Adresse" id="adresse" onChange={this.onChange}/>
-                    <Field labelVal="Code Postal" id="codePostal" onChange={this.onChange}/> */}
-                    {this.state.formInit.map(val =><Field labelVal={val.label} id={val.id} onChange={this.onChange}/>  ) }
-                    <input className="btn btn-success" type="submit" value="Envoyer"/>
-                    <a href="#" onClick={this.props.onChangeForm} >J'ai deja un compte! je me connecte</a>
+                <form onSubmit={this.props.handleOnSubmit} >
+
+                    {FORM_INIT.map((val,i) => <Field 
+                                 key={i}
+                                 labelVal={val.label} 
+                                 id={val.id}
+                                 onChange={this.props.handleOnChange}
+                                 errorMsg={this.props.errorMsg[val.id] }
+                                /> 
+                        )}
+
+                    <input disabled className="btn btn-success" type="submit" value="Envoyer"/>
+                    <a href="#" onClick={this.props.onChangeForm} >
+                     J'ai deja un compte! je me connecte
+                    </a>
                 </form>
             </>
          );
     }
 }
- 
-export default LoginForm;
+const mapStateToProps=(state)=>{
+    return {
+        formInit: state.formInit,
+        errorMsg : state.errorMsg,
+        values : state.values
+
+    }
+}
+const mapDispatchToProps = (dispatch, state)=>{
+    return {
+        handleOnChange : (e)=>{
+            dispatch({
+                type: "ON_CHANGE",
+                payload : {
+                    target : e.target,
+                    id : e.target.id
+                }
+            })
+
+        },
+        handleOnSubmit : (e)=>{
+            e.preventDefault();
+            dispatch({
+                type: "ON_SUBMIT",
+                payload : {
+
+                }
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps,)(LoginForm);

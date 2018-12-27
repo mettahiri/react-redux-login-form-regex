@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import Field from './Field'
 class SignUpForm extends Component {
     state = { 
-        email : '',
-        mdp:''
+       values:{email :"",  mdp:""} 
      }
 
-   onChange=(e)=>{
-       const values = this.state;
+    onChange=(e)=>{
+       const values = this.state.values;
        values[e.target.id] = e.target.value;
        this.setState({values})
-   }
+    }
 
     render() { 
         return ( 

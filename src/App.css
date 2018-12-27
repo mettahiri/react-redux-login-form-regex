@@ -69,6 +69,43 @@ form a {
    position: relative;
    margin:50px 0;
 }
+
+
+.errorMsg {
+  position: absolute;
+  left:30px;
+  bottom:-33px;
+  background: rgb(198, 68, 68);
+  border-radius : 5px;
+  color: white;
+  padding:2px 10px;
+  font-weight: normal;
+  font-size: 15px;
+  min-width: 100px;
+  z-index: 1;
+  display: none;
+  animation : fadeIn .6s;
+}
+
+.errorMsg::before {
+  position: absolute;
+  content:"";
+  left : 20px;
+  top:-5px;
+  display: inline-block;
+  transform: rotate(45deg);
+  height:15px;
+  width :15px;
+  background: rgb(198, 68, 68);
+  z-index: -1;
+}
+.showErrorMsg{
+  display: block;
+}
+.errorColor {
+  color : red;
+  border: 1px solid red;
+}
 @media screen and (max-width:768px){
   .App {
     width:90%;
