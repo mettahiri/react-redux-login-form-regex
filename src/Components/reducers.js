@@ -18,7 +18,7 @@ let initState =  {
         codePostal:""
     },
     errorMsg : {
-        nom:"ee",
+        nom:"",
         prenom:"",
         email:"",
         confirmEmail:"",
